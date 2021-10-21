@@ -1,5 +1,5 @@
 import sys
-# read = sys.stdin.readline().split()
+
 N = int(input())
 class stack:
     def __init__(self):
