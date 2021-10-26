@@ -1,40 +1,39 @@
 import sys
 import heapq as hq
+from collections import defaultdict
 
 def input():
     return sys.stdin.readline().rstrip()
 
 N = int(input())
-ans = []
-maxheap = []
-minheap = []
+
 
 for iter in range(N):
+    maxheap = []
+    minheap = []
+    countDict = defaultdict(int)
     T = int(input())
     for i in range(T):
         command, number = input().split()
         if command == "I":
+            countDict[int(number)] += 1
             hq.heappush(minheap,int(number))
             hq.heappush(maxheap,-int(number))
         else:
-            if len(minheap) == 0 or len(maxheap)==0:
+            if len(minheap) == 0 or len(maxheap) == 0:
                 continue
             else:
                 if number == "1":
-                    minheap.remove(max(minheap))
-                    hq.heappop(maxheap)
+                    temp = -hq.heappop(maxheap)
+                    countDict[temp] -= 1
                 else:
-                    maxheap.remove(max(maxheap))
-                    hq.heappop(minheap)
-        # print("maxheap",maxheap)
-        # print("minheap",minheap)
-    if len(maxheap) == 0 or len(minheap)==0:
-        ans.append(1)
+                    temp = hq.heappop(minheap)
+                    countDict[temp] -= 1
+        while minheap and countDict[minheap[0]] == 0:
+            hq.heappop(minheap)
+        while maxheap and countDict[-maxheap[0]] == 0:
+            hq.heappop(maxheap)
+    if len(maxheap) == 0 or len(minheap)== 0:
+        print("EMPTY")
     else:
-        ans.append((-maxheap[0], minheap[0]))
-    maxheap.clear()
-    minheap.clear()
-
-for i in ans:
-    if i == 1: print("EMPTY")
-    else: print(*i)
+        print(-maxheap[0], minheap[0])
