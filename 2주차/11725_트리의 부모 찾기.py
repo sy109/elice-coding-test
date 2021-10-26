@@ -1,21 +1,26 @@
 import sys
-from collections import defaultdict
-
-def input():
-    return sys.stdin.readline().rstrip()
-
-N = int(input())
-a = defaultdict(int)
-for _ in range(1,N):
-    node1, node2 = map(int,input().split())
-    if node1 == 1:
-        a[node2] = 1
-    elif node2 == 1:
-        a[node1] = 1
-    else:
-        if a[node1] != 0:
-            a[node2] = node1
-        else:
-            a[node1] = node2
+sys.setrecursionlimit(10 ** 9)
+ 
+N=int(sys.stdin.readline())#노드의 갯수
+tree=[[] for _ in range(N+1)]
+for _ in range(N-1):
+    s,e=map(int,sys.stdin.readline().split())
+    tree[s].append(e)
+    tree[e].append(s)
+ 
+ 
+#부모저장
+parents=[0 for _ in range(N+1)]
+ 
+ 
+def DFS(start,tree,parents):
+    for i in tree[start]:#연결된 노드 모두탐색
+        if parents[i]==0:#한번도 방문한적이 없다면
+           parents[i]=start#부모노드 저장
+           DFS(i,tree,parents)
+ 
+ 
+DFS(1,tree,parents)
+ 
 for i in range(2,N+1):
-    print(a[i])
+    print(parents[i])
