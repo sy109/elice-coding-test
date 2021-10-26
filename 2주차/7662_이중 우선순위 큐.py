@@ -7,8 +7,7 @@ def input():
 
 N = int(input())
 
-
-for iter in range(N):
+for _ in range(N):
     maxheap = []
     minheap = []
     countDict = defaultdict(int)
