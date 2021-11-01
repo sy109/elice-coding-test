@@ -26,7 +26,7 @@ for i in range(N-1):
     #부모 노드에 자식 노드와 간선의 가중치를, 자식노드에 부모노드와 간선의 가중치를 입력
     tree[parent].append([curNode,weight])
     tree[curNode].append([parent,weight])
-print(tree)
+# print(tree)
 #나올수 없는 값으로 각 노드에서 가장 먼 거리를 초기화 함
 distance = [-1] * (N+1)
 # 1번 노드에서 시작함으로 0으로 설정

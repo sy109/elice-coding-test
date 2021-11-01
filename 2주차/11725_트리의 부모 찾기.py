@@ -20,6 +20,7 @@ parents=[0 for _ in range(N+1)]
  
 def DFS(start,tree,parents):
     for i in tree[start]:#연결된 노드 모두탐색
+        # print(parents,"@@")
         if parents[i] == 0:#한번도 방문한적이 없다면
            parents[i]=start#부모노드 저장
            DFS(i,tree,parents)
