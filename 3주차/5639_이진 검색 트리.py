@@ -6,12 +6,20 @@ def input():
 preOrder = [] #입력받은 프리오더 배열
 
 # 아무것도 안들어올때까지 계속 입력을 받음
+# while True:
+#     userInput = input()
+#     if not userInput:
+#         break
+#     else:
+#         preOrder.append(int(userInput))
 while True:
     userInput = input()
-    if not userInput:
-        break
-    else:
+    try:
         preOrder.append(int(userInput))
+    except:
+        break
+
+
 postOrder = []
 
 def getSubTrees(start, end):

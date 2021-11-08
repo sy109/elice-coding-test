@@ -12,7 +12,7 @@ for _ in range(n):
     numbers.pop(0)
     
     gcdsBefore = combinations(numbers,2)
-    
+    # print(list(gcdsBefore))
     for combination in gcdsBefore:
         sum += gcd(combination[0],combination[1])
     print(sum)
